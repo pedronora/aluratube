@@ -5,8 +5,6 @@ import Menu from '../src/components/Menu';
 import { StyledTimeline } from '../src/components/Timeline';
 
 function HomePage() {
-    console.log(config.playlists);
-
     return (
         <>
             <CSSReset />
@@ -37,10 +35,16 @@ const StyledHeader = styled.section`
         gap: 16px;
     }
 `;
+const StyledBanner = styled.div`
+    background-color: blue;
+    background-image: url(${({ bg }) => bg});
+    background-position: center top;
+    height: 230px;
+`;
 function Header() {
     return (
         <StyledHeader>
-            {/* <img src='banner' /> */}
+            <StyledBanner bg={config.banner} />
             <div className='user-info'>
                 <img src={`https://github.com/${config.github}.png`} />
                 <div>
