@@ -1,8 +1,8 @@
 import config from '../config.json';
 import styled from 'styled-components';
-import { CSSReset } from './components/CSSReset';
-import Menu from './components/Menu';
-import { StyledTimeline } from './components/Timeline';
+import { CSSReset } from '../src/components/CSSReset';
+import Menu from '../src/components/Menu';
+import { StyledTimeline } from '../src/components/Timeline';
 
 function HomePage() {
     console.log(config.playlists);
@@ -13,19 +13,13 @@ function HomePage() {
             <div>
                 <Menu />
                 <Header />
-                <Timeline playlists={config.playlists}>
-                    Conteúdo
-                </Timeline>
+                <Timeline playlists={config.playlists}>Conteúdo</Timeline>
             </div>
         </>
     );
 }
 
 export default HomePage;
-
-// function Menu() {
-//     return <div>Menu</div>;
-// }
 
 const StyledHeader = styled.section`
     img {
