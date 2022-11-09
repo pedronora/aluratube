@@ -13,7 +13,9 @@ function HomePage() {
             <div>
                 <Menu />
                 <Header />
-                <Timeline playlists={config.playlists} />
+                <Timeline playlists={config.playlists}>
+                    Conteúdo
+                </Timeline>
             </div>
         </>
     );
