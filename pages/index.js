@@ -1,3 +1,4 @@
+import React from 'react';
 import config from '../config.json';
 import styled from 'styled-components';
 import { CSSReset } from '../src/components/CSSReset';
@@ -5,13 +6,22 @@ import Menu from '../src/components/Menu';
 import { StyledTimeline } from '../src/components/Timeline';
 
 function HomePage() {
+    const [valorDoFiltro, setValorDoFiltro] = React.useState('');
     return (
         <>
             <CSSReset />
             <div>
-                <Menu />
+                <Menu
+                    valorDoFiltro={valorDoFiltro}
+                    setValorDoFiltro={setValorDoFiltro}
+                />
                 <Header />
-                <Timeline playlists={config.playlists}>Conteúdo</Timeline>
+                <Timeline
+                    searchValue={valorDoFiltro}
+                    playlists={config.playlists}
+                >
+                    Conteúdo
+                </Timeline>
             </div>
         </>
     );
@@ -56,7 +66,7 @@ function Header() {
     );
 }
 
-function Timeline(props) {
+function Timeline({ searchValue, ...props }) {
     const playlistsNames = Object.keys(props.playlists);
     return (
         <StyledTimeline>
@@ -66,14 +76,24 @@ function Timeline(props) {
                     <section>
                         <h2>{playlistName}</h2>
                         <div>
-                            {videos.map((video) => {
-                                return (
-                                    <a href={video.url}>
-                                        <img src={video.thumb} />
-                                        <span>{video.title}</span>
-                                    </a>
-                                );
-                            })}
+                            {videos
+                                .filter((video) => {
+                                    const titleNormalized =
+                                        video.title.toLowerCase();
+                                    const searchValuedNormalized =
+                                        searchValue.toLowerCase();
+                                    return titleNormalized.includes(
+                                        searchValuedNormalized
+                                    );
+                                })
+                                .map((video) => {
+                                    return (
+                                        <a href={video.url}>
+                                            <img src={video.thumb} />
+                                            <span>{video.title}</span>
+                                        </a>
+                                    );
+                                })}
                         </div>
                     </section>
                 );
