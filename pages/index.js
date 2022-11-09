@@ -37,7 +37,6 @@ const StyledHeader = styled.section`
     }
 
     .user-info {
-        margin-top: 50px;
         display: flex;
         align-items: center;
         width: 100%;
